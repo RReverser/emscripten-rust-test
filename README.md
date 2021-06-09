@@ -1,0 +1,6 @@
+ - Use emsdk 2.0.13.
+ - `cargo +nightly run --target wasm32-unknown-emscripten` should work but currently fails. Instead copy the failing command and:
+	- Remove `"-l" "c"`
+	- Replace `"-s" "ERROR_ON_UNDEFINED_SYMBOLS=1"` with `...=0`
+	- Run it manually in the console.
+	- Invoke `node --experimental-wasm-threads --experimental-wasm-bulk-memory target/wasm32-unknown-emscripten/debug/deps/emscripten_rust_test.js` (Cargo would've put it a bit further up and could execute it manually, but since it failed early in the process, we have to get a temporary artifact instead).
